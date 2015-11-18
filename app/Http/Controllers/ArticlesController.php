@@ -15,8 +15,9 @@ class ArticlesController extends Controller{
 		//  return view('articles/index')->with('list',$articleModel::latest()
 		//			->where('published_at','<=',Carbon::now())->get());
 		//  使用模型中自定义的expandScope方法拼凑sql代码片段
-
-		return view('articles/index')->with('list',Article::latest()->published()->get());
+		return view('articles/index')->with('list',Article::latest()
+		                                                  ->published()
+		                                                  ->get());
 	}
 	/*显示一个数据*/
 	public function show($id){
@@ -42,10 +43,19 @@ class ArticlesController extends Controller{
 		Article::create($input);
 		return redirect('/articles');
 	}*/
-
 	//对表单数据进行验证发表文章,不需要use Request;
-	public function store(Requests\CreateArticleRequest $request){
+	public function store(Requests\ArticleRequest $request){
 		Article::create($request->all());
+		return redirect('/articles');
+	}
+	public function edit($id){
+		$article=Article::findOrFail($id);
+		//		return compact('article');
+		return view('articles.edit',compact('article'));
+	}
+	public function update(Requests\ArticleRequest $request,$id){
+		$article=Article::findOrFail($id);
+		$article->update($request->all());
 		return redirect('/articles');
 	}
 }

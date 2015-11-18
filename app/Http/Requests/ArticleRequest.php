@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateArticleRequest extends Request {
+class ArticleRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -28,6 +28,13 @@ class CreateArticleRequest extends Request {
 			'content'=>'required',
 			'published_at'=>'required|date'
 		];
+
+		/*如果你想分场景来进行验证
+		$rules=[];
+		if($condition=='aaa'){
+			$rules['bbb']='cccc';
+		}
+		return $rules;*/
 	}
 
 }
