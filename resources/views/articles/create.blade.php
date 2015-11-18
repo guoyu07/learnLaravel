@@ -22,9 +22,24 @@
             <?= Form::input('date', 'published_at', date('Y-m-d'),['class'=>'form-control']) ?>
         </div>
 
-        <?=Form::button('提交',['type'=>'submit','class'=>"btn btn-primary btn-block"]) ?>
+        <div class="form-group">
+            <?=Form::button('提交',['type'=>'submit','class'=>"btn btn-primary btn-block"]) ?>
+        </div>
 
     <?= Form::close() ?>
+
+    {{--可以输出所有错误--}}
+    {{--{{print_r($errors)}}--}}
+
+    {{--递归显示,增加错误可读性--}}
+    @if($errors->any())
+        <ul class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+
 @endsection
 
 

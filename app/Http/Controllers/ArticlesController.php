@@ -2,7 +2,6 @@
 
 use App\Article;
 use App\Http\Requests;
-use Request;
 //use Illuminate\Http\Request;
 //上述的Request是默认生成的,至于为嘛不用,而是用下面这个,我还没想清楚
 class ArticlesController extends Controller{
@@ -34,14 +33,19 @@ class ArticlesController extends Controller{
 	public function create(){
 		return view('articles.create');
 	}
-	//发表文章
+
+
+	/*不对表单数据进行验证发表文章,需要use Request;
 	public function store(){
 		$input=Request::all();//获取所有请求
-		//		$input=Request::get('title');//获取get请求
-		$model=new Article();
-		//  创建数据结果集
-		$model->create($input);
-		//  页面重定向
+		//$input=Request::get('title');//获取get请求
+		Article::create($input);
+		return redirect('/articles');
+	}*/
+
+	//对表单数据进行验证发表文章,不需要use Request;
+	public function store(Requests\CreateArticleRequest $request){
+		Article::create($request->all());
 		return redirect('/articles');
 	}
 }

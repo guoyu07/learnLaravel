@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    {{ $single['id'] }}
-    {{ $single['name'] }}
+    {{ $single['title'] }}
+    <hr/>
+    {{ $single['content'] }}
 </body>
 </html>
