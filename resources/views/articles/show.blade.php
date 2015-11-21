@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    {{ $single['title'] }}
+    {{ $article->title }}
     <hr/>
-    {{ $single['content'] }}
+    {{ $article->content }}
 </body>
 </html>
