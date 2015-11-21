@@ -18,6 +18,7 @@ class Authenticate{
 	}
 	/**
 	 * Handle an incoming request.
+	 * 如果是访客,判断是否为跨站登录
 	 * @param  \Illuminate\Http\Request $request
 	 * @param  \Closure $next
 	 * @return mixed

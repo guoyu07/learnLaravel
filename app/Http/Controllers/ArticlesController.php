@@ -2,11 +2,23 @@
 
 use App\Article;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 //use Illuminate\Http\Request;
 //上述的Request是默认生成的,至于为嘛不用,而是用下面这个,我还没想清楚
 class ArticlesController extends Controller{
+
+	public function __construct(){
+		//中间件,在控制器中加入权限控制
+		//对Article控制器中所有方法都加入权限控制
+		//$this->middleware('auth');
+		//通过中间件,对Article控制器中的create方法进行控制
+		$this->middleware('auth',['only'=>'create']);
+
+	}
+
 	/*显示所有数据*/
 	public function index(){
+		//		return \Auth::user()->name;//用于获取session中的用户权限数据
 		$articleModel=new Article();
 		//  return view('articles/index')->with('list',$articleModel->all()->toArray());
 		//  latest方法可以传字段参数,默认按照createed_at时间倒序排,额外的功能请直接看源码
@@ -32,6 +44,9 @@ class ArticlesController extends Controller{
 	}
 	/*发布文章页面*/
 	public function create(){
+		if(Auth::guest()){
+			return redirect('/articles');
+		}
 		return view('articles.create');
 	}
 

@@ -29,8 +29,6 @@ class User extends Model implements AuthenticatableContract,CanResetPasswordCont
 		'password',
 		'remember_token'
 	];
-
-
 	/**
 	 * 对象关系模型,一个用户可以有多篇文章
 	 * 例如我们可以通过以下代码获取关联模型中的文章信息
@@ -40,5 +38,9 @@ class User extends Model implements AuthenticatableContract,CanResetPasswordCont
 	 */
 	public function articles(){
 		return $this->hasMany('App\Article');
+	}
+
+	public function IsManager(){
+		return true;
 	}
 }

@@ -12,9 +12,17 @@
 Route::get('/','WelcomeController@index');
 //即/home
 Route::get('home','HomeController@index');
-Route::get('contact','TestController@contact');
-//即/contact
-Route::get('about','TestController@about');
+
+//Route::get('contact','TestController@contact');
+//use function as second argument to return execute results;
+Route::get('contact',function(){
+	return 'If you are interested in me,please contact me on QQ with number 924714558';
+});
+
+//在进入/about之前通过自定义中间件进行权限控制,注意后面是"uses",而不是"use"
+Route::get('about',['middleware'=>'manager','uses'=>'TestController@about']);
+
+
 /*
 注意匹配顺序,一般来说,范围小的要有更高的优先级
 Route::get('articles','ArticlesController@index');
@@ -31,8 +39,7 @@ Route::get('articles/{id}',[
 //下面这一行代码,就可以概括上述注释掉的路由配置,不过表单的action写法也需要相对应的进行更改
 //具体看git记录
 Route::resource('articles','ArticlesController');
-
-//Route::controllers([
-//	'auth'=>'Auth\AuthController',
-//	'password'=>'Auth\PasswordController',
-//]);
+Route::controllers([
+	'auth'=>'Auth\AuthController',
+	'password'=>'Auth\PasswordController',
+]);
