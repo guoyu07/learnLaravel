@@ -34,7 +34,7 @@ elixir(function(mix){
         'test/Hello.js',
         'test/World.js'
     ],'public/js/test/all.js');
-    
+
     /*防止浏览器缓存,在blade页面调用时,需要使用{{ elixir('path/to/file') }}获取文件名前的hash值*/
     mix.version('public/css/test/all.css');
 

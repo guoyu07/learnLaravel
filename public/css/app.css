@@ -6224,11 +6224,6 @@ button.close {
     display: none !important;
   }
 }
-body {
-  background-color: red;
-  padding-top: 20px;
-  padding-top: 30px;
-}
 body,
 label,
 .checkbox label {

@@ -70,7 +70,12 @@ class ArticlesController extends Controller{
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 	public function store(Requests\ArticleRequest $request){
-		Article::create($request->all());
+		$input=$request->all();
+		$input['user_id']=\Auth::user()->id;
+		Article::create($input);
+		//一个是通过类的方法设置值,一个是通过函数设置值
+		//\Session::flash('createResult','Success in creating previous article');
+		session()->flash('createResult','Success in creating previous article');
 		return redirect('/articles');
 	}
 
@@ -98,4 +103,11 @@ class ArticlesController extends Controller{
 		$article->update($request->all());
 		return redirect('/articles');
 	}
+
+	/*
+	增->create
+	删->destroy
+	查->find
+	改->save
+	*/
 }

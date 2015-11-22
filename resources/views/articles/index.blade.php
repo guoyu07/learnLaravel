@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
+@if(Session::has('createResult'))
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{--一个是通过类的方法取值,一个是通过函数取值--}}
+        <p><strong>Title!</strong>{{Session::get('createResult')}}</p>
+        <p><strong>Title!</strong>{{session('createResult')}}</p>
+    </div>
+@endif
 <h1>文章列表</h1>
 <hr>
-
 @foreach($list as $key=>$value)
-    <h2><a href="{{ url('/articles',$value['id']) }}">{{ $value['title'] }}</a><span>{{$value['published_at']}}</span></h2>
+    <p><h2><a href="{{ url('/articles',$value['id']) }}">{{ $value['title'] }}</a></h2>{{ $value['published_at'] }}</p>
     <p>{{$value['content']}}</p>
 @endforeach
 
