@@ -1,0 +1,1 @@
+{"version":3,"sources":["hello.less","world.less"],"names":[],"mappings":"AAAA;AACA;AACA;ACFA;AACA;AACA","file":"all.css","sourcesContent":["body{\n  color: red;\n}","body{\n  color: green;\n}"],"sourceRoot":"/source/"}

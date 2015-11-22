@@ -13,11 +13,14 @@ Route::get('/','WelcomeController@index');
 //即/home
 Route::get('home','HomeController@index');
 
-//Route::get('contact','TestController@contact');
-//use function as second argument to return execute results;
+Route::get('contact','TestController@contact');
+
+
+/*use function as second argument to return execute results;
 Route::get('contact',function(){
 	return 'If you are interested in me,please contact me on QQ with number 924714558';
 });
+*/
 
 //在进入/about之前通过自定义中间件进行权限控制,注意后面是"uses",而不是"use"
 Route::get('about',['middleware'=>'manager','uses'=>'TestController@about']);

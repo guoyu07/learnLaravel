@@ -1,0 +1,1 @@
+{"version":3,"sources":["Hello.js","World.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;ACHA;AACA;AACA;AACA","file":"all.js","sourcesContent":["/**\n * Created by zqq on 11/22/15.\n */\nfunction Hello(){}","/**\n * Created by zqq on 11/22/15.\n */\nfunction World(){}"],"sourceRoot":"/source/"}

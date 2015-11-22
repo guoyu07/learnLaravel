@@ -5,6 +5,7 @@
     <title>@yield('title')</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ elixir('css/test/all.css') }}">
 </head>
 <body>
 <div class="container">
