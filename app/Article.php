@@ -15,7 +15,6 @@ class Article extends Model{
 		'user_id'
 	];
 
-
 	/**
 	 *无需手动调用,自动对字段进行过滤管理,参数名不可或缺,,尽管在调用的时候无需传参
 	 */
@@ -43,5 +42,16 @@ class Article extends Model{
 	 */
 	public function user(){
 		return $this->belongsTo('App\User');
+	}
+
+	/**对象关系模型,标签与文章,多对多
+	 * 如果是通过文章获取标签,则使用以下方法;
+	 * $article=new App\Article();
+	 * $article->first()->tags->array();
+	 * 通过标签获取文章同理
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function tags(){
+		return $this->belongsToMany('App\Tag');
 	}
 }
