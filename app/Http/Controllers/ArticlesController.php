@@ -81,8 +81,9 @@ class ArticlesController extends Controller{
 	public function store(Requests\ArticleRequest $request){
 		//存储文章数据
 		$article=Auth::user()->articles()->create($request->all());
-		//存储关联模型数据
-		$article->tags()->attach($request->input('tag_list'));
+		//存储关联模型数据,两种方法
+		//$article->tags()->attach($request->input('tag_list'));
+		$this->syncTags($article,$request->input('tag_list'));
 
 		//一个是通过类的方法设置值,一个是通过函数设置值
 		//\Session::flash('createResult','Success in creating previous article');
@@ -108,14 +109,26 @@ class ArticlesController extends Controller{
 	 * @param \App\Article $article
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
-	public function update(Requests\ArticleRequest $request,Article $article){
+	public function update(Article $article,Requests\ArticleRequest $request){
 		/*
 		$article=Article::findOrFail($id);
 		$article->update($request->all());
 		*/
-		$article->update($request->all());
+		//$article->update($request->all());
+		//修改了文章标签之后,使用sync同步语句来增加或删除标签关联模型中的数据记录
+		//使用window+alt+m可以剥离出通用的方法,对代码进行重构
+		$this->syncTags($article,$request->input('tag_list'));
 		return redirect('/articles');
 	}
+	/**
+	 * 实现关联模型在修改时的同步功能
+	 * @param \App\Article $article
+	 * @param array $tags
+	 */
+	public function syncTags(Article $article,array $tags){
+		$article->tags()->sync($tags);
+	}
+
 
 	/*
 	增->create
