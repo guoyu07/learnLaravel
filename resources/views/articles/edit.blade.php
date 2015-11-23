@@ -10,6 +10,7 @@
     <?= Form::model($article,['method'=>'patch','action'=>['ArticlesController@update',$article->id]]) ?>
             @include('articles/form',['submitButtonText'=>'编辑发布'])
     <?= Form::close() ?>
+
     @include('errors.list')
 @endsection
 {{--编辑页面与发布页面的表单类似,有两处修改的地方--}}

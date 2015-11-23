@@ -2,6 +2,7 @@
 
 use App\Article;
 use App\Http\Requests;
+use App\Tag;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Http\Request;
 //上述的Request是默认生成的,至于为嘛不用,而是用下面这个,我还没想清楚
@@ -49,10 +50,18 @@ class ArticlesController extends Controller{
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
 	 */
 	public function create(){
+		/*
 		if(Auth::guest()){
 			return redirect('/articles');
 		}
-		return view('articles.create');
+		*/
+		//Tag::lists('name','name')返回一个数组
+		//相当于select name,name from siguoya_tags,
+		//其中第一个参数为返回的数组中的值
+		//其中第二个参数为返回的数组中的键
+		$tags=Tag::lists('name','id');
+		//zqq($tags);
+		return view('articles.create',compact('tags'));
 	}
 
 
@@ -70,9 +79,11 @@ class ArticlesController extends Controller{
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 	public function store(Requests\ArticleRequest $request){
-		$input=$request->all();
-		$input['user_id']=\Auth::user()->id;
-		Article::create($input);
+		//存储文章数据
+		$article=Auth::user()->articles()->create($request->all());
+		//存储关联模型数据
+		$article->tags()->attach($request->input('tag_list'));
+
 		//一个是通过类的方法设置值,一个是通过函数设置值
 		//\Session::flash('createResult','Success in creating previous article');
 		session()->flash('createResult','Success in creating previous article');
@@ -87,8 +98,10 @@ class ArticlesController extends Controller{
 	 * @return \Illuminate\View\View
 	 */
 	public function edit(Article $article){
-		return view('articles.edit',compact('article'));
+		$tags=Tag::lists('name','id');
+		return view('articles.edit',compact('article','tags'));
 	}
+
 
 	/**文章更新,使用路由绑定
 	 * @param \App\Http\Requests\ArticleRequest $request
