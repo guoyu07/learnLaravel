@@ -9,23 +9,34 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/**
+ * 服务容器的基本构成原理
+ * class Baz{
+ * }
+ * class Bar{
+ * public $baz;
+ * public function __construct(Baz $baz){
+ * $this->baz=$baz;
+ * }
+ * }
+ * Route::get('foo',function (Bar $bar){
+ * dd($bar);
+ * });
+ */
 Route::get('/','WelcomeController@index');
 //即/home
 Route::get('home','HomeController@index');
-
 Route::get('contact','TestController@contact');
-
-
 /*use function as second argument to return execute results;
 Route::get('contact',function(){
 	return 'If you are interested in me,please contact me on QQ with number 924714558';
 });
 */
-
 //在进入/about之前通过自定义中间件进行权限控制,注意后面是"uses",而不是"use"
-Route::get('about',['middleware'=>'manager','uses'=>'TestController@about']);
-
-
+Route::get('about',[
+	'middleware'=>'manager',
+	'uses'=>'TestController@about'
+]);
 /*
 注意匹配顺序,一般来说,范围小的要有更高的优先级
 Route::get('articles','ArticlesController@index');
