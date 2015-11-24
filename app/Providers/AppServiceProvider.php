@@ -7,7 +7,7 @@ class AppServiceProvider extends ServiceProvider{
 	 * @return void
 	 */
 	public function boot(){
-		//
+
 	}
 	/**
 	 * Register any application services.

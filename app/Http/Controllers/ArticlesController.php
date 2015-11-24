@@ -25,7 +25,8 @@ class ArticlesController extends Controller{
 		//  return view('articles/index')->with('list',$articleModel::latest()
 		//			->where('published_at','<=',Carbon::now())->get());
 		//  使用模型中自定义的expandScope方法拼凑sql代码片段
-		return view('articles/index')->with('list',Article::latest()->published()->get());
+		$list=Article::latest()->published()->get();
+		return view('articles/index',compact('list'));
 	}
 
 

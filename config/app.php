@@ -85,7 +85,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
 	|--------------------------------------------------------------------------
-	|
+	| 通过观察得知,我们需要导入的都是扩展包里面以Provider结尾的文件
 	| The service providers listed here will be automatically loaded on the
 	| request to your application. Feel free to add your own services to
 	| this array to grant expanded functionality to your applications.
@@ -126,11 +126,10 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-	    /*
-	     * Downloaded By Zqq ->_-> path:/vendor/illuminate
-	     * 通过观察得知,我们需要导入的都是扩展包里面以Provider结尾的文件
-	     */
-	    'Illuminate\Html\HtmlServiceProvider'
+	    //Downloaded By Zqq ->_-> path:/vendor/illuminate
+	    'Illuminate\Html\HtmlServiceProvider',
+	    //customed by zqq
+		'App\Providers\ViewComposerServiceProvider'
 	],
 	/*
 	|--------------------------------------------------------------------------
